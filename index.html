@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - HTTToken</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white p-4 shadow">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <!-- Left: Logo + Title -->
+      <div class="flex items-center space-x-3">
+        <img src="htt-logo.png" alt="HTT Logo" class="w-10 h-10 object-contain" />
+        <span class="text-2xl font-bold">HTT Token Admin Panel</span>
+      </div>
+      <!-- Right: Admin Info -->
+      <div class="flex items-center space-x-4">
+        <span class="text-sm">🔐 Logged in as: Admin</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar + Content -->
+  <div class="flex max-w-7xl mx-auto mt-6">
+    <!-- Sidebar -->
+    <nav class="w-64 p-4 bg-white shadow rounded-xl mr-6 space-y-4">
+      <a href="#dashboard" class="block p-2 rounded hover:bg-indigo-100">📊 Dashboard</a>
+      <a href="#users" class="block p-2 rounded hover:bg-indigo-100">👥 Users & Vendors</a>
+      <a href="#token" class="block p-2 rounded hover:bg-indigo-100">💰 HTT Token</a>
+      <a href="#affiliates" class="block p-2 rounded hover:bg-indigo-100">🎁 Affiliate Rewards</a>
+      <a href="#bookings" class="block p-2 rounded hover:bg-indigo-100">🛎️ Bookings</a>
+      <a href="#analytics" class="block p-2 rounded hover:bg-indigo-100">📈 Analytics</a>
+      <a href="#security" class="block p-2 rounded hover:bg-indigo-100">🛡️ Security</a>
+      <a href="#dao" class="block p-2 rounded hover:bg-indigo-100">🏛️ DAO Controls</a>
+      <a href="#settings" class="block p-2 rounded hover:bg-indigo-100">⚙️ Settings</a>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 bg-white rounded-xl shadow">
+      <!-- Dashboard Tab -->
+      <section id="dashboard" class="tab-content block">
+        <h2 class="text-xl font-semibold mb-4">Welcome to HTT Admin Dashboard</h2>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Total Users</div>
+            <div class="text-2xl font-bold">1,453</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Active Vendors</div>
+            <div class="text-2xl font-bold">217</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Live Bookings</div>
+            <div class="text-2xl font-bold">29</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">HTT Today</div>
+            <div class="text-2xl font-bold">528 HTT</div>
+          </div>
+        </div>
+
+        <!-- Alerts Panel -->
+        <div class="mt-8">
+          <h3 class="text-lg font-semibold mb-2">System Alerts</h3>
+          <ul class="space-y-2 text-sm bg-gray-50 p-4 border rounded">
+            <li>⏳ 12 KYC applications pending review</li>
+            <li>⚠️ 6 bookings awaiting confirmation</li>
+            <li>🔐 2 users locked 2FA access</li>
+            <li>🧾 3 unpaid vendor commissions detected</li>
+          </ul>
+        </div>
+
+        <!-- Recent Activity Feed -->
+        <div class="mt-8">
+          <h3 class="text-lg font-semibold mb-2">Recent Activity</h3>
+          <ul class="space-y-1 text-sm bg-gray-50 p-4 border rounded">
+            <li>✅ Booking #1204 completed by Jane Doe</li>
+            <li>🎯 25 HTT rewarded to john@travel.com</li>
+            <li>🧾 Vendor approved: Lao Tour Transport</li>
+            <li>❌ KYC rejected: wallet 0xABC...</li>
+          </ul>
+        </div>
+
+        <!-- Shortcuts -->
+        <div class="mt-8">
+          <h3 class="text-lg font-semibold mb-2">Quick Shortcuts</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="#bookings" class="bg-indigo-600 text-white p-3 rounded text-center shadow">🧾 Manage Bookings</a>
+            <a href="#security" class="bg-indigo-600 text-white p-3 rounded text-center shadow">👥 Review KYC</a>
+            <a href="#dao" class="bg-indigo-600 text-white p-3 rounded text-center shadow">🔄 Sync IPFS</a>
+            <a href="#admin-settings" class="bg-indigo-600 text-white p-3 rounded text-center shadow">⚙️ Admin-Settings</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin Preferences Tab -->
+      <section id="admin-settings" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">My Preferences</h2>
+
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Profile Information</h3>
+          <input type="text" placeholder="Admin Name" class="p-2 border rounded w-full mb-2">
+          <input type="email" placeholder="admin@example.com (read-only)" class="p-2 border rounded w-full" disabled>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Interface Preferences</h3>
+          <select class="p-2 border rounded w-full mb-2">
+            <option>Default Tab: Dashboard</option>
+            <option>Users & Vendors</option>
+            <option>Bookings</option>
+          </select>
+          <select class="p-2 border rounded w-full mb-2">
+            <option>Theme: Light</option>
+            <option>Dark</option>
+            <option>Auto</option>
+          </select>
+          <select class="p-2 border rounded w-full mb-2">
+            <option>Language: English</option>
+            <option>Lao</option>
+            <option>Thai</option>
+          </select>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" checked>
+            <span>Enable notification sounds</span>
+          </label>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Security Preferences</h3>
+          <label class="flex items-center space-x-2 mb-2">
+            <input type="checkbox" checked>
+            <span>Enable 2FA Authentication</span>
+          </label>
+          <input type="number" placeholder="Set Withdrawal Limit (USD)" class="p-2 border rounded w-full mb-2">
+          <input type="text" placeholder="Authorized IPs (comma-separated)" class="p-2 border rounded w-full mb-2">
+          <p class="text-xs text-gray-500">Last login from: 192.168.1.101 - Chrome Browser</p>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Reset Layout</h3>
+          <label class="flex items-center space-x-2 mb-2">
+            <input type="checkbox">
+            <span>Clear dashboard layout</span>
+          </label>
+          <label class="flex items-center space-x-2 mb-2">
+            <input type="checkbox">
+            <span>Reset sidebar position</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox">
+            <span>Restore all to default settings</span>
+          </label>
+        </div>
+
+        <div>
+          <button class="bg-blue-600 text-white px-6 py-2 rounded">💾 Save Preferences</button>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+      <!-- Token Tab -->
+      <section id="token" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">HTT Token Control</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Mint HTT -->
+          <div class="bg-green-50 p-4 rounded shadow">
+            <h3 class="font-bold">Mint Tokens</h3>
+            <input type="text" placeholder="Recipient Wallet Address" class="w-full mt-2 p-2 border rounded">
+            <input type="number" placeholder="Amount to Mint" class="w-full mt-2 p-2 border rounded">
+            <button class="bg-green-600 text-white px-4 py-2 mt-2 rounded">Mint</button>
+          </div>
+
+          <!-- Burn HTT -->
+          <div class="bg-red-50 p-4 rounded shadow">
+            <h3 class="font-bold">Burn Tokens</h3>
+            <input type="text" placeholder="Wallet Address" class="w-full mt-2 p-2 border rounded">
+            <input type="number" placeholder="Amount to Burn" class="w-full mt-2 p-2 border rounded">
+            <button class="bg-red-600 text-white px-4 py-2 mt-2 rounded">Burn</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Tab -->
+      <section id="users" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Users & Vendors</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">✅</th>
+                <th class="p-2 border">👤 Profile</th>
+                <th class="p-2 border">🧾 Role</th>
+                <th class="p-2 border">🔑 Wallet</th>
+                <th class="p-2 border">📄 KYC</th>
+                <th class="p-2 border">🔐 2FA</th>
+                <th class="p-2 border">🏷️ Affiliate</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <!-- API-populated rows will go here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+      <!-- Affiliate Rewards Tab -->
+      <section id="affiliates" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Affiliate Rewards</h2>
+
+        <!-- Filter/Search Bar -->
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <input type="text" placeholder="Search by email or wallet..." class="p-2 border rounded w-64">
+          <select class="p-2 border rounded">
+            <option>Status: All</option>
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+            <option>Paid</option>
+          </select>
+          <select class="p-2 border rounded">
+            <option>Role: All</option>
+            <option>Traveler</option>
+            <option>Vendor</option>
+          </select>
+        </div>
+
+        <!-- Applications Table -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">✅</th>
+                <th class="p-2 border">👤 Referrer</th>
+                <th class="p-2 border">🧾 Role</th>
+                <th class="p-2 border">📥 Referrals</th>
+                <th class="p-2 border">💰 Pending HTT</th>
+                <th class="p-2 border">🎯 Status</th>
+                <th class="p-2 border">⏱️ Applied On</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic rows will populate here -->
+              <tr>
+                <td class="border p-2 text-center"><input type="checkbox"></td>
+                <td class="border p-2">Alice<br><small>alice@example.com</small></td>
+                <td class="border p-2">Traveler</td>
+                <td class="border p-2">5</td>
+                <td class="border p-2">32 HTT</td>
+                <td class="border p-2">Pending</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 space-x-2">
+                  <button class="text-blue-600">View</button>
+                  <button class="text-green-600">Approve</button>
+                  <button class="text-red-600">Reject</button>
+                </td>
+              </tr>
+              <!-- Add more rows here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Payout Log -->
+        <h3 class="text-lg font-semibold mt-10 mb-2">Reward Payout Log</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 border">🆔 TX ID</th>
+                <th class="p-2 border">👤 Referrer</th>
+                <th class="p-2 border">💸 HTT</th>
+                <th class="p-2 border">🕒 Date</th>
+                <th class="p-2 border">✅ Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">TX12345</td>
+                <td class="border p-2">Alice</td>
+                <td class="border p-2">32 HTT</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 text-green-600">Paid</td>
+              </tr>
+              <!-- More payouts here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Bookings Tab -->
+      <section id="bookings" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Manage Bookings</h2>
+
+        <!-- Filters Toolbar -->
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <input type="text" placeholder="Search by ID, Traveler, Vendor..." class="p-2 border rounded w-64">
+          <select class="p-2 border rounded">
+            <option>All Types</option>
+            <option>Hotel</option>
+            <option>Transport</option>
+            <option>Tour</option>
+          </select>
+          <select class="p-2 border rounded">
+            <option>All Statuses</option>
+            <option>Pending</option>
+            <option>Paid</option>
+            <option>Cancelled</option>
+            <option>Checked-In</option>
+            <option>Completed</option>
+          </select>
+          <select class="p-2 border rounded">
+            <option>All Payment Methods</option>
+            <option>USD</option>
+            <option>HTT</option>
+          </select>
+          <button class="px-4 py-2 text-sm bg-indigo-500 text-white rounded">Today's</button>
+          <button class="px-4 py-2 text-sm bg-indigo-500 text-white rounded">This Week</button>
+          <button class="px-4 py-2 text-sm bg-red-500 text-white rounded">Overdue</button>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">✅</th>
+                <th class="p-2 border">🆔 Booking ID</th>
+                <th class="p-2 border">👤 Traveler</th>
+                <th class="p-2 border">🏨 Vendor</th>
+                <th class="p-2 border">🧭 Type</th>
+                <th class="p-2 border">💵 Amount</th>
+                <th class="p-2 border">🕓 Date</th>
+                <th class="p-2 border">🧾 Status</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white">
+                <td class="border p-2 text-center"><input type="checkbox"></td>
+                <td class="border p-2">BK-00123</td>
+                <td class="border p-2">Jane Doe<br><small>jane@example.com</small></td>
+                <td class="border p-2">Sunset Hotel</td>
+                <td class="border p-2">Hotel</td>
+                <td class="border p-2">$90 / 15 HTT</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 text-yellow-600">Pending</td>
+                <td class="border p-2 space-x-2">
+                  <button class="text-blue-600">View</button>
+                  <button class="text-green-600">Confirm</button>
+                  <button class="text-red-600">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bulk Action Panel (Example Only) -->
+        <div class="mt-4 space-x-2">
+          <button class="px-4 py-2 bg-green-600 text-white rounded">✅ Approve Selected</button>
+          <button class="px-4 py-2 bg-red-600 text-white rounded">❌ Cancel Selected</button>
+          <button class="px-4 py-2 bg-blue-600 text-white rounded">📤 Export Selected</button>
+        </div>
+
+        <!-- Booking Alert Highlights -->
+        <div class="mt-8">
+          <h3 class="text-lg font-semibold mb-2">Smart Alerts</h3>
+          <ul class="bg-yellow-50 p-4 border rounded text-sm">
+            <li>⚠️ Overbooked alert: 2 vendors with conflicting check-ins</li>
+            <li>❌ Checked-In but payment still pending: BK-00112</li>
+            <li>🚨 Vendor exceeded 10 cancellations this week: LaoTours</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Analytics Tab -->
+      <section id="analytics" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Platform Analytics</h2>
+
+        <!-- Top Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Total Users</div>
+            <div class="text-2xl font-bold">1,452</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Total Bookings</div>
+            <div class="text-2xl font-bold">612</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">HTT Distributed</div>
+            <div class="text-2xl font-bold">12,500 HTT</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Active Affiliates</div>
+            <div class="text-2xl font-bold">87</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Burned HTT</div>
+            <div class="text-2xl font-bold">1,800 HTT</div>
+          </div>
+          <div class="bg-white border rounded p-4 shadow text-center">
+            <div class="text-gray-500 text-sm">Last 24h Activity</div>
+            <div class="text-2xl font-bold">73 actions</div>
+          </div>
+        </div>
+
+        <!-- Booking Trend Chart Placeholder -->
+        <div class="mt-10">
+          <h3 class="text-lg font-semibold mb-2">Booking Trends (Last 30 Days)</h3>
+          <div class="h-48 bg-gray-100 rounded shadow flex items-center justify-center text-gray-400">
+            [ Booking Trend Chart Placeholder ]
+          </div>
+        </div>
+
+        <!-- HTT Flow Chart Placeholder -->
+        <div class="mt-10">
+          <h3 class="text-lg font-semibold mb-2">HTT Token Flow</h3>
+          <div class="h-48 bg-gray-100 rounded shadow flex items-center justify-center text-gray-400">
+            [ HTT Flow Chart Placeholder ]
+          </div>
+        </div>
+
+        <!-- Affiliate Performance Chart Placeholder -->
+        <div class="mt-10">
+          <h3 class="text-lg font-semibold mb-2">Top 10 Referrers</h3>
+          <div class="h-48 bg-gray-100 rounded shadow flex items-center justify-center text-gray-400">
+            [ Affiliate Performance Chart Placeholder ]
+          </div>
+        </div>
+      </section>
+
+      <!-- Security Tab -->
+      <section id="security" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Security</h2>
+
+        <!-- KYC Verification Queue -->
+        <h3 class="text-lg font-semibold mb-2">KYC Verification Queue</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">👤 User</th>
+                <th class="p-2 border">🧾 Role</th>
+                <th class="p-2 border">🪪 ID Type</th>
+                <th class="p-2 border">📄 Status</th>
+                <th class="p-2 border">🗓️ Submitted</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">Jane Doe<br><small>jane@example.com</small></td>
+                <td class="border p-2">Traveler</td>
+                <td class="border p-2">Passport</td>
+                <td class="border p-2 text-yellow-600">Pending</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 space-x-2">
+                  <button class="text-blue-600">View</button>
+                  <button class="text-green-600">Approve</button>
+                  <button class="text-red-600">Reject</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Blacklist/Whitelist -->
+        <h3 class="text-lg font-semibold mb-2">Blacklist & Whitelist</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">Address / Email</th>
+                <th class="p-2 border">Type</th>
+                <th class="p-2 border">Reason</th>
+                <th class="p-2 border">Date</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">0xAbC123...9F</td>
+                <td class="border p-2 text-red-600">Blacklist</td>
+                <td class="border p-2">Multiple violations</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 text-blue-600">Unban</td>
+              </tr>
+              <tr>
+                <td class="border p-2">partner@agency.com</td>
+                <td class="border p-2 text-green-600">Whitelist</td>
+                <td class="border p-2">Agency beta access</td>
+                <td class="border p-2">2025-05-19</td>
+                <td class="border p-2 text-red-600">Remove</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Suspicious Activity Log -->
+        <h3 class="text-lg font-semibold mb-2">Suspicious Activity Log</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">Timestamp</th>
+                <th class="p-2 border">User</th>
+                <th class="p-2 border">Event</th>
+                <th class="p-2 border">IP Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">2025-05-20 11:22</td>
+                <td class="border p-2">0xabc...12e</td>
+                <td class="border p-2">5 Failed logins</td>
+                <td class="border p-2">192.168.1.100</td>
+              </tr>
+              <tr>
+                <td class="border p-2">2025-05-20 09:18</td>
+                <td class="border p-2">admin@example.com</td>
+                <td class="border p-2">2FA reset requested</td>
+                <td class="border p-2">192.168.1.88</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 2FA Management -->
+        <h3 class="text-lg font-semibold mb-2">2FA Management</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">User</th>
+                <th class="p-2 border">Role</th>
+                <th class="p-2 border">2FA Status</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">vendor@example.com</td>
+                <td class="border p-2">Hotel Vendor</td>
+                <td class="border p-2 text-green-600">Enabled</td>
+                <td class="border p-2 text-blue-600">Reset</td>
+              </tr>
+              <tr>
+                <td class="border p-2">traveler@example.com</td>
+                <td class="border p-2">Traveler</td>
+                <td class="border p-2 text-red-600">Disabled</td>
+                <td class="border p-2 text-blue-600">Force Enable</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- DAO Controls Tab -->
+      <section id="dao" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">DAO Controls</h2>
+
+        <!-- Proposal Log -->
+        <h3 class="text-lg font-semibold mb-2">Proposals</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">🆔 Proposal ID</th>
+                <th class="p-2 border">📄 Title</th>
+                <th class="p-2 border">👤 Submitted By</th>
+                <th class="p-2 border">🗓️ Date</th>
+                <th class="p-2 border">🗳️ Status</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">#101</td>
+                <td class="border p-2">Increase HTT Burn Rate</td>
+                <td class="border p-2">0xAbC...9F</td>
+                <td class="border p-2">2025-05-20</td>
+                <td class="border p-2 text-yellow-600">Active</td>
+                <td class="border p-2 space-x-2">
+                  <button class="text-blue-600">View</button>
+                  <button class="text-green-600">Execute</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DAO Council Seats -->
+        <h3 class="text-lg font-semibold mb-2">DAO Council Members</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="min-w-full border text-sm">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">👤 Member</th>
+                <th class="p-2 border">🧾 Role</th>
+                <th class="p-2 border">🔑 Wallet</th>
+                <th class="p-2 border">📅 Term</th>
+                <th class="p-2 border">⚙️ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border p-2">Alice Smith</td>
+                <td class="border p-2">Treasury</td>
+                <td class="border p-2">0x123...abc</td>
+                <td class="border p-2">2024-01-01 → 2025-12-31</td>
+                <td class="border p-2 text-red-600">Revoke</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Emergency Tools -->
+        <h3 class="text-lg font-semibold mb-2">Emergency Tools</h3>
+        <div class="space-y-2 mb-6">
+          <button class="bg-red-600 text-white px-4 py-2 rounded">🚨 Pause Smart Contract</button>
+          <button class="bg-yellow-500 text-white px-4 py-2 rounded">⚙️ Update DAO Parameters</button>
+        </div>
+
+        <!-- DAO Activity Feed -->
+        <h3 class="text-lg font-semibold mb-2">Activity Feed</h3>
+        <ul class="text-sm space-y-1 bg-gray-50 p-4 border rounded">
+          <li>🗳️ Proposal #101 created by 0xAbC...9F</li>
+          <li>✅ Vote cast by 0x123...abc (FOR)</li>
+          <li>🚨 Contract paused at block #1853212</li>
+        </ul>
+      </section>
+
+      <!-- Settings Tab -->
+      <section id="settings" class="tab-content hidden">
+        <h2 class="text-xl font-semibold mb-4">Platform Settings</h2>
+
+        <!-- Booking & Reward Settings -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Booking & Reward Settings</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="number" placeholder="Traveler Reward (HTT)" class="p-2 border rounded">
+            <input type="number" placeholder="Vendor Contribution (HTT)" class="p-2 border rounded">
+            <input type="number" placeholder="Minimum Reward Payout Threshold (HTT)" class="p-2 border rounded">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" checked>
+              <span>Only reward when booking status = Paid or Credit Received</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- HTT Price Index -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">HTT Price Index</h3>
+          <input type="text" placeholder="Current Index (e.g. 1 HTT = $19)" class="p-2 border rounded w-full">
+          <p class="text-xs text-gray-500 mt-1">Effective immediately upon save.</p>
+        </div>
+
+        <!-- Fee & Commission Settings -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Fee & Commission Settings</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input type="number" placeholder="Vendor Listing Fee (USD)" class="p-2 border rounded">
+            <input type="number" placeholder="Platform Service Fee (%)" class="p-2 border rounded">
+            <input type="number" placeholder="Affiliate Level 1 Commission (%)" class="p-2 border rounded">
+            <input type="number" placeholder="Affiliate Level 2 Commission (%)" class="p-2 border rounded">
+          </div>
+        </div>
+
+        <!-- Domain & Wallet Info -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Domain & Wallet Integration</h3>
+          <input type="text" placeholder="ENS Domain (e.g. htttoken.eth)" class="p-2 border rounded w-full mb-2">
+          <input type="text" placeholder="IPFS CID (Current version)" class="p-2 border rounded w-full mb-2">
+          <input type="text" placeholder="Treasury Wallet Address" class="p-2 border rounded w-full">
+        </div>
+
+        <!-- Platform Toggles -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold mb-2">Platform Toggles</h3>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" checked>
+              <span>Enable Booking System</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" checked>
+              <span>Enable HTT Rewards</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" checked>
+              <span>Enable Affiliate Referrals</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="checkbox">
+              <span>Maintenance Mode (Disable Public Access)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div>
+          <button class="bg-blue-600 text-white px-6 py-2 rounded">💾 Save Settings</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+        document.getElementById(targetId).classList.remove('hidden');
+      });
+    });
+
+    // Example API fetch placeholder (replace with real Bookinger API URL)
+    fetch('https://bookinger.online/api/users')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('userTableBody');
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="border p-2 text-center"><input type="checkbox"></td>
+            <td class="border p-2">${user.name}<br><small>${user.email}</small></td>
+            <td class="border p-2">${user.role}</td>
+            <td class="border p-2">${user.wallet.slice(0,6)}...${user.wallet.slice(-4)}</td>
+            <td class="border p-2">${user.kyc}</td>
+            <td class="border p-2">${user.twofa}</td>
+            <td class="border p-2">${user.affiliate}</td>
+            <td class="border p-2">
+              <button class="text-blue-600">View</button> |
+              <button class="text-green-600">Approve</button> |
+              <button class="text-red-600">Ban</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
+<script src="tabcontent.js"></script>
+<script>
+  function filterToday() {
+    setTimeout(() => {
+      document.querySelector('#bookings select:nth-of-type(2)').value = 'Pending';
+      // simulate filter apply if needed
+    }, 100); // wait for tab to show
+  }
+</script>
+
+<script>
+function showTabFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+    const target = document.getElementById(hash);
+    if (target) target.classList.remove('hidden');
+  }
+}
+
+// Bind sidebar click
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    window.location.hash = targetId; // trigger URL change
+    showTabFromHash(); // apply tab change
+  });
+});
+
+// Run once on page load
+window.addEventListener('DOMContentLoaded', showTabFromHash);
+
+// Optional: Handle manual URL hash change
+window.addEventListener('hashchange', showTabFromHash);
+</script>
+
+
+</body>
+</html>
